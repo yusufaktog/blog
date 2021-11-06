@@ -5,12 +5,12 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-data class Blog(
+data class Blog @JvmOverloads constructor(
     @Id
     @Column(name = "blog_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val blog_id: String?,
+    val blog_id: String? = "",
     val blog_name: String,
     val creation_date: LocalDate,
 
@@ -21,7 +21,7 @@ data class Blog(
         joinColumns = [JoinColumn(name = "blog_id", referencedColumnName = "blog_id")],
         inverseJoinColumns = [JoinColumn(name = "author_id", referencedColumnName = "author_id")]
     )
-    val authors: Set<Author>,
+    val authors: Set<Author>? = HashSet(),
 
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
@@ -36,4 +36,4 @@ data class Blog(
     )
     val commentators: Set<Commentator>? = HashSet(),
 
-)
+    )

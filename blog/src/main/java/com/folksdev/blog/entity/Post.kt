@@ -10,7 +10,7 @@ data class Post @JvmOverloads constructor(
     @Column(name = "post_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    val post_id : String?,
+    val post_id : String? = "",
     val post_content : String,
     val post_date: LocalDate,
     val author_id: String,
@@ -19,14 +19,14 @@ data class Post @JvmOverloads constructor(
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id",referencedColumnName = "author_id") // her zaman many to one olan yere join column koy!
+    @JoinColumn(name = "author_id",referencedColumnName = "author_id",insertable = false,updatable = false) // her zaman many to one olan yere join column koy!
     val author: Author,
 
     @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
     val comments: Set<Comment>? = HashSet(),
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "blog_id",referencedColumnName = "blog_id") // her zaman many to one olan yere join column koy!
+    @JoinColumn(name = "blog_id",referencedColumnName = "blog_id",insertable = false,updatable = false) // her zaman many to one olan yere join column koy!
     val blog: Blog
 
     ) {

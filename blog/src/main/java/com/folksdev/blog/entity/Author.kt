@@ -14,7 +14,7 @@ data class Author @JvmOverloads constructor(
     @Column(name = "author_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    val author_id : String?,
+    val author_id : String? = "",
     val name: String,
     val dateOfBirth: LocalDate,
     val gender: Gender,
