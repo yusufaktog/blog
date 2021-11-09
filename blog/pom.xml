@@ -12,10 +12,11 @@
     <artifactId>blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>blog</name>
-    <description>Blog Project</description>
+    <description>Blog Api </description>
     <properties>
         <java.version>11</java.version>
-        <kotlin.version>1.5.30</kotlin.version>
+        <kotlin.version>1.5.31</kotlin.version>
+        <flyway-maven-plugin.version>8.0.0</flyway-maven-plugin.version>
     </properties>
     <dependencies>
         <!-- SPRING -->
@@ -38,6 +39,7 @@
             <optional>true</optional>
         </dependency>
 
+
         <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -51,6 +53,7 @@
             <version>${kotlin.version}</version>
         </dependency>
 
+
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
@@ -61,6 +64,16 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
 
         <!-- TEST -->

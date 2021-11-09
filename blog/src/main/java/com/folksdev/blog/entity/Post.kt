@@ -1,5 +1,6 @@
 package com.folksdev.blog.entity
 
+import org.hibernate.Hibernate
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDate
 import javax.persistence.*
@@ -30,4 +31,18 @@ data class Post @JvmOverloads constructor(
     val blog: Blog
 
     ) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        other as Post
+
+        return post_id != null && post_id == other.post_id
+    }
+
+    override fun hashCode(): Int = 0
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(post_id = $post_id )"
+    }
 }
