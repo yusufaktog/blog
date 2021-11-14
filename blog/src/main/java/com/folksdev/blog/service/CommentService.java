@@ -3,6 +3,7 @@ package com.folksdev.blog.service;
 import com.folksdev.blog.dto.CommentDto;
 import com.folksdev.blog.dto.converter.CommentDtoConverter;
 import com.folksdev.blog.dto.request.CreateCommentRequest;
+import com.folksdev.blog.dto.request.update.UpdateCommentRequest;
 import com.folksdev.blog.entity.Comment;
 import com.folksdev.blog.entity.Commentator;
 import com.folksdev.blog.entity.Post;
@@ -32,49 +33,54 @@ public class CommentService {
     }
 
     public Comment findByCommentId(String id) {
-        return commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("Comment with id: " + id + " could not found "));
+        return commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("Comment with id: " + id + " could not find"));
 
     }
 
     public CommentDto getCommentById(String id) {
-        return commentDtoConverter.convert(commentRepository.getById(id));
+        return commentDtoConverter.convert(findByCommentId(id));
     }
 
-    public List<CommentDto> getAllCommentList() {
-        return commentRepository.findAll().stream().map(commentDtoConverter::convert).collect(Collectors.toList());
+    public List<CommentDto> getAllCommentDtoList() {
+        return commentDtoConverter.convert(getAllCommentList());
+    }
+
+    public List<Comment> getAllCommentList() {
+        return commentRepository.findAll();
     }
 
 
     public CommentDto createComment(CreateCommentRequest request) {
 
-        Commentator commentator = commentatorService.findByCommentatorId(request.getCommentator_id());
-        Post post = postService.findByPostId(request.getPost_id());
+        Post post = postService.findByPostId(request.getPost().getPost_id());
+        Commentator commentator = commentatorService.findByCommentatorId(request.getCommentator().getCommentator_id());
 
-        Comment comment = new Comment(request.getComment_id(),
+        Comment comment = new Comment(
                 request.getComment_content(),
                 request.getComment_time(),
-                request.getPost_id(),
                 post,
-                commentator.getCommentator_id());
+                commentator);
 
         return commentDtoConverter.convert(commentRepository.save(comment));
     }
 
     public String deleteByCommentId(String commentId) {
+        findByCommentId(commentId);
         commentRepository.deleteById(commentId);
         return "delete " + commentId;
     }
 
-    public CommentDto updateComment(CreateCommentRequest request) {
+    public CommentDto updateComment(String id, UpdateCommentRequest request) {
+        Comment comment = findByCommentId(id);
 
-        Comment comment = new Comment(request.getComment_id(),
+        Comment updatedComment = new Comment(
+                comment.getComment_id(),
                 request.getComment_content(),
-                request.getComment_time(),
-                request.getPost_id(),
-                request.getPost(),
-                request.getCommentator_id());
+                comment.getComment_time(),
+                comment.getPost(),
+                comment.getCommentator());
 
-        return commentDtoConverter.convert(commentRepository.save(comment));
+        return commentDtoConverter.convert(commentRepository.save(updatedComment));
     }
 
 }

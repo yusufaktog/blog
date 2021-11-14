@@ -2,7 +2,7 @@ package com.folksdev.blog.controller;
 
 import com.folksdev.blog.dto.PostDto;
 import com.folksdev.blog.dto.request.CreatePostRequest;
-import com.folksdev.blog.entity.Post;
+import com.folksdev.blog.dto.request.update.UpdatePostRequest;
 import com.folksdev.blog.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +25,7 @@ public class PostController {
     }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<PostDto> createPost(@PathVariable String userId,
-                                              @Valid @RequestBody CreatePostRequest request) {
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody CreatePostRequest request) {
         return ResponseEntity.ok(postService.createPost(request));
     }
 
@@ -36,7 +35,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody CreatePostRequest request) {
-        return ResponseEntity.ok(postService.updatePost(request));
+    public ResponseEntity<PostDto> updatePost(@PathVariable String id,@Valid @RequestBody UpdatePostRequest request) {
+        return ResponseEntity.ok(postService.updatePost(id,request));
     }
 }

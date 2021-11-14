@@ -21,7 +21,6 @@ data class Author @JvmOverloads constructor(
     val dateOfBirth: LocalDate,
     val gender: Gender,
     val auth_date: LocalDateTime,
-    val blog_id: String,
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     val posts: Set<Post>? = HashSet(),

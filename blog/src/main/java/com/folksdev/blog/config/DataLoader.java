@@ -4,7 +4,6 @@ import com.folksdev.blog.entity.Author;
 import com.folksdev.blog.entity.Blog;
 import com.folksdev.blog.repository.AuthorRepository;
 import com.folksdev.blog.repository.BlogRepository;
-import com.folksdev.blog.service.BlogService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -26,19 +25,8 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-    Blog blog = new Blog("test", LocalDate.now());
-    blogRepository.save(blog);
+    public void run(String... args) {
 
-    Author author = new Author(
-            "test",
-            "test@",
-            LocalDate.now(),
-            Author.Gender.MALE,
-            LocalDateTime.now(),
-            blog.getBlog_id(),
-            Collections.emptySet());
-    authorRepository.save(author);
     }
 
 

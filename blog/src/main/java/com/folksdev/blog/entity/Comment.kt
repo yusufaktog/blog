@@ -14,18 +14,15 @@ data class Comment @JvmOverloads constructor(
     val comment_id : String? = "",
     val comment_content: String,
     val comment_time: LocalDateTime,
-    val post_id : String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id",referencedColumnName = "post_id",insertable = false,updatable = false)
+    @JoinColumn(name = "post_id")
     val post: Post,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "commentator_id",referencedColumnName = "commentator_id",insertable = false,updatable = false)
-    val commentator: Commentator? = null,
+    @JoinColumn(name = "commentator_id")
+    val commentator: Commentator
 
-
-    val commentator_id: String,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

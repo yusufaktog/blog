@@ -2,16 +2,13 @@ package com.folksdev.blog.controller;
 
 import com.folksdev.blog.dto.BlogDto;
 import com.folksdev.blog.dto.request.CreateBlogRequest;
-import com.folksdev.blog.entity.Blog;
+import com.folksdev.blog.dto.request.update.UpdateBlogRequest;
 import com.folksdev.blog.service.BlogService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "v1/Blog")
@@ -24,7 +21,7 @@ public class BlogController {
 
     @GetMapping
     public ResponseEntity<List<BlogDto>> getBlogs() {
-        return ResponseEntity.ok(blogService.getAllBlogList());
+        return ResponseEntity.ok(blogService.getAllBlogDtoList());
     }
 
     @GetMapping(value = "/{id}")
@@ -38,8 +35,8 @@ public class BlogController {
     }
 
     @PutMapping
-    public ResponseEntity<BlogDto> updateBlog(@Valid @RequestBody CreateBlogRequest request) {
-        return ResponseEntity.ok(blogService.updateBlog(request));
+    public ResponseEntity<BlogDto> updateBlog(@PathVariable String id,@Valid @RequestBody UpdateBlogRequest request) {
+        return ResponseEntity.ok(blogService.updateBlog(id,request));
     }
 
     @DeleteMapping(value = "/{blogId}")

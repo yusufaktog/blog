@@ -14,10 +14,9 @@ data class Commentator @JvmOverloads constructor(
     val commentator_id: String? = "",
     val commentator_name: String,
     val auth_date: LocalDate,
-    val blog_id: String,
 
 
-    @OneToMany(mappedBy = "commentator_id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "commentator", fetch = FetchType.LAZY)
     val comments: Set<Comment>? = HashSet(),
 
     @ManyToMany

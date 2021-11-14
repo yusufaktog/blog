@@ -2,7 +2,7 @@ package com.folksdev.blog.controller;
 
 import com.folksdev.blog.dto.CommentDto;
 import com.folksdev.blog.dto.request.CreateCommentRequest;
-import com.folksdev.blog.entity.Comment;
+import com.folksdev.blog.dto.request.update.UpdateCommentRequest;
 import com.folksdev.blog.service.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +35,7 @@ public class CommentController {
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<CommentDto> updateComment(@Valid @RequestBody CreateCommentRequest request) {
-        return ResponseEntity.ok(commentService.updateComment(request));
+    public ResponseEntity<CommentDto> updateComment(@PathVariable String id, @Valid @RequestBody UpdateCommentRequest request) {
+        return ResponseEntity.ok(commentService.updateComment(id, request));
     }
 }

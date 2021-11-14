@@ -26,9 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="f870be46-143b-499b-9bed-147645ee1d73">
-        <schema name="information_schema" object-types="table, view, sequence, function" />
-        <schema name="pg_catalog" object-types="table, view, sequence, function" />
-        <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
+        <schema name="public" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -38,22 +36,24 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="f870be46-143b-499b-9bed-147645ee1d73" object-ref="schemas/public/tables/author" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="f870be46-143b-499b-9bed-147645ee1d73" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="Blog.Author" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.commentator" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.comment" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.blog" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.flyway_schema_history" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.blog_authors" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.author" active-filter-id="EMPTY_FILTER">
       <filter id="5758b45e-45f4-40a6-afc0-785e19a60098" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="author_id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.post" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.account" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
@@ -64,7 +64,6 @@
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/blog/src/main/resources/db/migration/V1_1__add_account.sql" connection-id="f870be46-143b-499b-9bed-147645ee1d73" session-id="MAIN" current-schema="public" />
-    <mapping file-url="file://$PROJECT_DIR$/blog/src/main/resources/db/migration/V1_2__add_data_to_author.sql" connection-id="f870be46-143b-499b-9bed-147645ee1d73" session-id="MAIN" current-schema="public" />
     <mapping file-url="file://$PROJECT_DIR$/blog/src/main/resources/db/migration/V1_2__add_values_to_author.sql" connection-id="f870be46-143b-499b-9bed-147645ee1d73" session-id="MAIN" current-schema="public" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">

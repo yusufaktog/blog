@@ -4,6 +4,8 @@ package com.folksdev.blog.service;
 import com.folksdev.blog.dto.CommentatorDto;
 import com.folksdev.blog.dto.converter.CommentatorDtoConverter;
 import com.folksdev.blog.dto.request.CreateCommentatorRequest;
+import com.folksdev.blog.dto.request.update.UpdateCommentatorRequest;
+import com.folksdev.blog.entity.Comment;
 import com.folksdev.blog.entity.Commentator;
 import com.folksdev.blog.exception.CommentatorNotFoundException;
 import com.folksdev.blog.repository.CommentatorRepository;
@@ -20,21 +22,19 @@ public class CommentatorService {
 
     private final CommentatorRepository commentatorRepository;
     private final CommentatorDtoConverter commentatorDtoConverter;
-    private final BlogService blogService;
 
-    public CommentatorService(CommentatorRepository commentatorRepository, CommentatorDtoConverter commentatorDtoConverter, BlogService blogService) {
+    public CommentatorService(CommentatorRepository commentatorRepository, CommentatorDtoConverter commentatorDtoConverter) {
         this.commentatorRepository = commentatorRepository;
         this.commentatorDtoConverter = commentatorDtoConverter;
-        this.blogService = blogService;
     }
 
     public Commentator findByCommentatorId(String id) {
 
-        return commentatorRepository.findById(id).orElseThrow(() -> new CommentatorNotFoundException("Commentator with id: " + id + " could not found"));
+        return commentatorRepository.findById(id).orElseThrow(() -> new CommentatorNotFoundException("Commentator with id: " + id + " could not find"));
     }
 
     public CommentatorDto getCommentatorById(String id){
-        return commentatorDtoConverter.convert(commentatorRepository.getById(id));
+        return commentatorDtoConverter.convert(findByCommentatorId(id));
     }
 
     public CommentatorDto createCommentator(CreateCommentatorRequest request) {
@@ -42,32 +42,36 @@ public class CommentatorService {
         Commentator Commentator = new Commentator(
                 request.getCommentator_name(),
                 request.getAuth_date(),
-                request.getBlog_id(),
                 request.getBlogs()
         );
 
         return commentatorDtoConverter.convert(commentatorRepository.save(Commentator));
     }
 
-    public List<CommentatorDto> getAllCommentatorList() {
-        return commentatorRepository.findAll().stream().map(commentatorDtoConverter::convert).collect(Collectors.toList());
+    public List<CommentatorDto> getAllCommentatorDtoList() {
+        return commentatorDtoConverter.convert(getAllCommentatorList());
+    }
+    public List<Commentator> getAllCommentatorList() {
+        return commentatorRepository.findAll();
     }
 
-    public String deleteCommentatorByID(String CommentatorId) {
-        commentatorRepository.deleteById(CommentatorId);
+    public String deleteCommentatorByID(String commentatorId) {
+        findByCommentatorId(commentatorId);
 
-        return "delete" + CommentatorId;
+        commentatorRepository.deleteById(commentatorId);
+
+        return "delete " + commentatorId;
     }
 
-    public CommentatorDto updateCommentator(CreateCommentatorRequest request) {
+    public CommentatorDto updateCommentator(String id, UpdateCommentatorRequest request) {
+        Commentator commentator = findByCommentatorId(id);
 
         Commentator updatedCommentator = new Commentator(
-                request.getCommentator_id(),
+                commentator.getCommentator_id(),
                 request.getCommentator_name(),
-                request.getAuth_date(),
-                request.getBlog_id(),
-                Collections.emptySet(),
-                Collections.emptySet()
+                commentator.getAuth_date(),
+                commentator.getComments(),
+                commentator.getBlogs()
         );
 
         return commentatorDtoConverter.convert(commentatorRepository.save(updatedCommentator));
