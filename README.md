@@ -6,7 +6,7 @@
 ---
 This Project provides to create posts and comments for existing blogs, authors and commentators
 
-##Summary
+## Summary
 
 This is an API for network of blogs, where different blogs can be created,
 authors can share different posts on related blogs and commentators can comment
