@@ -60,15 +60,16 @@ JUnit test coverage is 100% as well as integration test are available
 * Flyway 8.0.0
 
 
-###Prerequisites
+### Prerequisites
 
 ---
 * Maven
 * PostgreSQL
 
 
-###Run & Build
+### Run & Build
 
+---
 SPORT:8080
 ```
 $ cd FolksDev_Blog/blog-api
