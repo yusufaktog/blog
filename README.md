@@ -30,8 +30,8 @@ PUT /v1/blog/{blogId} = updates the blog with given id
 DELETE /v1/blog/{blogId} = drops the given blog
 ```
 
-These 5 end points above are available as well
-for the other APIs with same manner.
+These 5 end points above are available as well as
+for the other APIs with the same manner.
 
 ---
 ```html
