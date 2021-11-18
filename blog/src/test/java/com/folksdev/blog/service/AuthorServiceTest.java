@@ -2,20 +2,18 @@ package com.folksdev.blog.service;
 
 import com.folksdev.blog.TestDataGenerator;
 import com.folksdev.blog.dto.AuthorDto;
-import com.folksdev.blog.dto.BlogDto;
-import com.folksdev.blog.dto.AuthorDto;
 import com.folksdev.blog.dto.converter.AuthorDtoConverter;
 import com.folksdev.blog.dto.request.CreateAuthorRequest;
-import com.folksdev.blog.dto.request.CreateBlogRequest;
 import com.folksdev.blog.dto.request.update.UpdateAuthorRequest;
 import com.folksdev.blog.entity.Author;
 import com.folksdev.blog.entity.Blog;
-import com.folksdev.blog.entity.Author;
 import com.folksdev.blog.exception.AuthorNotFoundException;
-import com.folksdev.blog.exception.AuthorNotFoundException;
+import com.folksdev.blog.exception.BlogNotFoundException;
 import com.folksdev.blog.repository.AuthorRepository;
+import com.folksdev.blog.repository.BlogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -26,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorServiceTest extends TestDataGenerator {
     private AuthorRepository authorRepository;
     private AuthorDtoConverter authorDtoConverter;
+    private BlogService blogService;
+
 
     private AuthorService authorService;
     
@@ -34,7 +34,9 @@ class AuthorServiceTest extends TestDataGenerator {
         authorRepository = Mockito.mock(AuthorRepository.class);
         authorDtoConverter = Mockito.mock(AuthorDtoConverter.class);
 
-        authorService = new AuthorService(authorRepository,authorDtoConverter);
+        blogService = Mockito.mock(BlogService.class);
+
+        authorService = new AuthorService(authorRepository,authorDtoConverter, blogService);
     }
     
     @Test
@@ -105,22 +107,38 @@ class AuthorServiceTest extends TestDataGenerator {
     }
 
     @Test
-    void testCreateAuthor_itShouldReturnAuthorDto(){
+    void testCreateAuthor_whenBlogExists_itShouldReturnAuthorDto(){
         CreateAuthorRequest authorRequest = generateCreateAuthorRequest();
 
         Author author = generateTestAuthor();
 
         AuthorDto expected = generateAuthorDto();
 
-        Mockito.when(authorRepository.save(author)).thenReturn(author);
-        Mockito.when(authorDtoConverter.convert(author)).thenReturn(expected);
 
-        AuthorDto actual = authorService.createAuthor(authorRequest);
+        Mockito.when(blogService.findByBlogId("blog_id")).thenReturn(generateBlog());
+        Mockito.when(authorDtoConverter.convert(author)).thenReturn(expected);
+        Mockito.when(authorRepository.save(author)).thenReturn(author);
+
+        AuthorDto actual = authorService.createAuthor("blog_id",authorRequest);
 
         assertEquals(expected,actual);
 
-        Mockito.verify(authorRepository).save(author);
+        Mockito.verify(blogService).findByBlogId("blog_id");
         Mockito.verify(authorDtoConverter).convert(author);
+        Mockito.verify(authorRepository).save(author);
+
+    }
+    @Test
+    void testCreateAuthor_whenBlogNotExists_itShouldThrowBlogNotFoundException(){
+        CreateAuthorRequest authorRequest = generateCreateAuthorRequest();
+
+        Mockito.when(blogService.findByBlogId("blog_id")).thenThrow(BlogNotFoundException.class);
+
+        assertThrows(BlogNotFoundException.class, () -> authorService.createAuthor("blog_id",authorRequest));
+
+        Mockito.verify(blogService).findByBlogId("blog_id");
+        Mockito.verifyNoInteractions(authorDtoConverter);
+        Mockito.verifyNoInteractions(authorRepository);
 
     }
 

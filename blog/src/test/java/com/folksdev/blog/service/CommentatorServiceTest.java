@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CommentatorServiceTest extends TestDataGenerator {
     private CommentatorRepository commentatorRepository;
     private CommentatorDtoConverter commentatorDtoConverter;
+    private BlogService blogService;
     
     private CommentatorService commentatorService;
 
@@ -28,8 +29,9 @@ class CommentatorServiceTest extends TestDataGenerator {
     void setUp() {
         commentatorRepository = Mockito.mock(CommentatorRepository.class);
         commentatorDtoConverter = Mockito.mock(CommentatorDtoConverter.class);
+        blogService = Mockito.mock(BlogService.class);
         
-        commentatorService = new CommentatorService(commentatorRepository,commentatorDtoConverter);
+        commentatorService = new CommentatorService(commentatorRepository,commentatorDtoConverter, blogService);
     }
 
     @Test
@@ -100,20 +102,22 @@ class CommentatorServiceTest extends TestDataGenerator {
     }
 
     @Test
-    void testCreateCommentator_itShouldReturnCommentatorDto(){
+    void testCreateCommentator_whenBlogExists_itShouldReturnCommentatorDto(){
         CreateCommentatorRequest authorRequest = generateCreateCommentatorRequest();
 
         Commentator author = generateTestCommentator();
 
         CommentatorDto expected = generateCommentatorDto();
 
-        Mockito.when(commentatorRepository.save(author)).thenReturn(author);
+        Mockito.when(blogService.findByBlogId("blog_id")).thenReturn(generateBlog());
         Mockito.when(commentatorDtoConverter.convert(author)).thenReturn(expected);
+        Mockito.when(commentatorRepository.save(author)).thenReturn(author);
 
-        CommentatorDto actual = commentatorService.createCommentator(authorRequest);
+        CommentatorDto actual = commentatorService.createCommentator("blog_id",authorRequest);
 
         assertEquals(expected,actual);
 
+        Mockito.verify(blogService).findByBlogId("blog_id");
         Mockito.verify(commentatorRepository).save(author);
         Mockito.verify(commentatorDtoConverter).convert(author);
 

@@ -23,27 +23,27 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<AuthorDto>> getAllUsers() {
         return ResponseEntity.ok(new ArrayList<>(authorService.getAllAuthorDtoList()));
     }
 
-    @GetMapping("/{AuthorId}")
+    @GetMapping("/{authorId}")
     public ResponseEntity<AuthorDto> getAuthorById(@PathVariable String authorId) {
         return ResponseEntity.ok(authorService.getAuthorById(authorId));
     }
 
-    @PostMapping
-    public ResponseEntity<AuthorDto> createAuthor(@Valid @RequestBody CreateAuthorRequest request) {
-        return ResponseEntity.ok(authorService.createAuthor(request));
+    @PostMapping("/{blogId}")
+    public ResponseEntity<AuthorDto> createAuthor(@PathVariable String blogId, @Valid @RequestBody CreateAuthorRequest request) {
+        return ResponseEntity.ok(authorService.createAuthor(blogId, request));
     }
 
-    @DeleteMapping("/{AuthorId}")
-    public ResponseEntity<String> deleteAuthor(@PathVariable String AuthorId) {
-        return ResponseEntity.ok(authorService.deleteAuthorByID(AuthorId));
+    @DeleteMapping("/{authorId}")
+    public ResponseEntity<String> deleteAuthor(@PathVariable String authorId) {
+        return ResponseEntity.ok(authorService.deleteAuthorByID(authorId));
     }
 
-    @PutMapping("/{AuthorId}")
+    @PutMapping("/{authorId}")
     public ResponseEntity<AuthorDto> updateAuthor(@PathVariable String authorId, @Valid @RequestBody UpdateAuthorRequest request) {
         return ResponseEntity.ok(authorService.updateAuthor(authorId,request));
     }

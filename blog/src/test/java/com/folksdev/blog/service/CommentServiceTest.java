@@ -47,11 +47,11 @@ class CommentServiceTest extends TestDataGenerator {
     void testCreateComment_whenPostNotExists_shouldThrowPostNotFoundException() {
         CreateCommentRequest createCommentRequest = generateCreateCommentRequest();
 
-        Mockito.when(postService.findByPostId(createCommentRequest.getPost().getPost_id())).thenThrow(PostNotFoundException.class);
+        Mockito.when(postService.findByPostId("post_id")).thenThrow(PostNotFoundException.class);
 
-        assertThrows(PostNotFoundException.class, () -> commentService.createComment(createCommentRequest));
+        assertThrows(PostNotFoundException.class, () -> commentService.createComment("post_id","commentator_id",createCommentRequest));
 
-        Mockito.verify(postService).findByPostId(createCommentRequest.getPost().getPost_id());
+        Mockito.verify(postService).findByPostId("post_id");
         Mockito.verifyNoInteractions(commentatorService);
         Mockito.verifyNoInteractions(commentRepository);
         Mockito.verifyNoInteractions(commentDtoConverter);
@@ -62,13 +62,13 @@ class CommentServiceTest extends TestDataGenerator {
     void testCreateComment_whenPostExistsAndCommentatorNotExist_shouldThrowCommentatorNotFoundException() {
         CreateCommentRequest createCommentRequest = generateCreateCommentRequest();
 
-        Mockito.when(postService.findByPostId(createCommentRequest.getPost().getPost_id())).thenReturn(createCommentRequest.getPost());
-        Mockito.when(commentatorService.findByCommentatorId(createCommentRequest.getCommentator().getCommentator_id())).thenThrow(CommentatorNotFoundException.class);
+        Mockito.when(postService.findByPostId("post_id")).thenReturn(generatePost());
+        Mockito.when(commentatorService.findByCommentatorId("commentator_id")).thenThrow(CommentatorNotFoundException.class);
 
-        assertThrows(CommentatorNotFoundException.class, () -> commentService.createComment(createCommentRequest));
+        assertThrows(CommentatorNotFoundException.class, () -> commentService.createComment("post_id","commentator_id",createCommentRequest));
 
-        Mockito.verify(postService).findByPostId(createCommentRequest.getPost().getPost_id());
-        Mockito.verify(commentatorService).findByCommentatorId(createCommentRequest.getCommentator().getCommentator_id());
+        Mockito.verify(postService).findByPostId("post_id");
+        Mockito.verify(commentatorService).findByCommentatorId("commentator_id");
         Mockito.verifyNoInteractions(commentRepository);
         Mockito.verifyNoInteractions(commentDtoConverter);
 
@@ -88,7 +88,7 @@ class CommentServiceTest extends TestDataGenerator {
         Mockito.when(commentDtoConverter.convert(comment)).thenReturn(expected);
         Mockito.when(commentRepository.save(comment)).thenReturn(comment);
 
-        CommentDto actual = commentService.createComment(createCommentRequest);
+        CommentDto actual = commentService.createComment("post_id","commentator_id",createCommentRequest);
 
         assertEquals(expected, actual);
 

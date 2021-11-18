@@ -5,7 +5,6 @@ import com.folksdev.blog.dto.request.*;
 import com.folksdev.blog.dto.request.update.*;
 import com.folksdev.blog.dto.summarizeddtos.*;
 import com.folksdev.blog.entity.*;
-import com.folksdev.blog.service.CommentatorService;
 
 
 import java.time.LocalDate;
@@ -13,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class TestDataGenerator {
 
@@ -49,7 +49,7 @@ public class TestDataGenerator {
                 Author.Gender.MALE,
                 TEST_DATE_TIME,
                 Collections.emptySet(),
-                Collections.emptySet()
+                Set.of(generateBlog())
         );
     }
 
@@ -60,7 +60,7 @@ public class TestDataGenerator {
                 TEST_DATE,
                 Author.Gender.MALE,
                 TEST_DATE_TIME,
-                Collections.emptySet()
+                Set.of(generateBlog())
         );
     }
 
@@ -89,14 +89,16 @@ public class TestDataGenerator {
                 "commentator_name",
                 TEST_DATE,
                 Collections.emptySet(),
-                Collections.emptySet()
+                Set.of(generateBlog())
         );
-    }    public Commentator generateTestCommentator() {
+    }
+
+    public Commentator generateTestCommentator() {
 
         return new Commentator(
                 "commentator_name",
                 TEST_DATE,
-                Collections.emptySet()
+                Set.of(generateBlog())
         );
     }
 
@@ -139,7 +141,7 @@ public class TestDataGenerator {
                 TEST_DATE,
                 Author.Gender.MALE,
                 Collections.emptyList(),
-                Collections.emptyList()
+                List.of(generateSummarizedBlogDto())
         );
     }
 
@@ -210,6 +212,14 @@ public class TestDataGenerator {
         );
     }
 
+    public SummarizedBlogDto generateSummarizedBlogDto() {
+        return new SummarizedBlogDto(
+                "blog_id",
+                "blog_name",
+                TEST_DATE
+        );
+    }
+
     public SummarizedCommentDto createSummarizedCommentDto() {
         return new SummarizedCommentDto(
                 "comment_id",
@@ -238,27 +248,21 @@ public class TestDataGenerator {
     public CreatePostRequest generateCreatePostRequest() {
         return new CreatePostRequest(
                 "post_content",
-                TEST_DATE,
-                generateAuthor(),
-                generateBlog()
+                TEST_DATE
         );
     }
 
     public CreateCommentatorRequest generateCreateCommentatorRequest() {
         return new CreateCommentatorRequest(
                 "commentator_name",
-                TEST_DATE,
-                Collections.emptySet(),
-                Collections.emptySet()
+                TEST_DATE
         );
     }
 
     public CreateCommentRequest generateCreateCommentRequest() {
         return new CreateCommentRequest(
                 "comment_content",
-                TEST_DATE_TIME,
-                generatePost(),
-                generateCommentator()
+                TEST_DATE_TIME
         );
     }
 
@@ -318,11 +322,11 @@ public class TestDataGenerator {
         return new UpdateAuthorRequest("author_name", "email", Author.Gender.MALE);
     }
 
-    public UpdateCommentatorRequest generateUpdateCommentatorRequest(){
+    public UpdateCommentatorRequest generateUpdateCommentatorRequest() {
         return new UpdateCommentatorRequest("commentator_name");
     }
 
-    public Commentator generateUpdateCommentator(Commentator commentator, UpdateCommentatorRequest updateCommentatorRequest){
+    public Commentator generateUpdateCommentator(Commentator commentator, UpdateCommentatorRequest updateCommentatorRequest) {
         return new Commentator(
                 commentator.getCommentator_id(),
                 updateCommentatorRequest.getCommentator_name(),

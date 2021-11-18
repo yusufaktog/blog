@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/Commentator")
+@RequestMapping("/v1/commentator")
 public class CommentatorController {
 
     private final CommentatorService commentatorService;
@@ -26,23 +26,23 @@ public class CommentatorController {
         return ResponseEntity.ok(commentatorService.getAllCommentatorDtoList());
     }
 
-    @GetMapping("/{CommentatorId}")
+    @GetMapping("/{commentatorId}")
     public ResponseEntity<CommentatorDto> getCommentatorById(@PathVariable String commentatorId) {
         return ResponseEntity.ok(commentatorService.getCommentatorById(commentatorId));
     }
 
-    @PostMapping
-    public ResponseEntity<CommentatorDto> createCommentator(@Valid @RequestBody CreateCommentatorRequest request) {
-        return ResponseEntity.ok(commentatorService.createCommentator(request));
+    @PostMapping("/{blogId}")
+    public ResponseEntity<CommentatorDto> createCommentator(@PathVariable String blogId, @Valid @RequestBody CreateCommentatorRequest request) {
+        return ResponseEntity.ok(commentatorService.createCommentator(blogId, request));
     }
 
-    @DeleteMapping("/{CommentatorId}")
+    @DeleteMapping("/{commentatorId}")
     public ResponseEntity<String> deleteCommentator(@PathVariable String commentatorId) {
         return ResponseEntity.ok(commentatorService.deleteCommentatorByID(commentatorId));
     }
 
-    @PutMapping("/{CommentatorId}")
-    public ResponseEntity<CommentatorDto> updateCommentator(@PathVariable String id,@Valid @RequestBody UpdateCommentatorRequest request) {
-        return ResponseEntity.ok(commentatorService.updateCommentator(id, request));
+    @PutMapping("/{commentatorId}")
+    public ResponseEntity<CommentatorDto> updateCommentator(@PathVariable String commentatorId,@Valid @RequestBody UpdateCommentatorRequest request) {
+        return ResponseEntity.ok(commentatorService.updateCommentator(commentatorId, request));
     }
 }

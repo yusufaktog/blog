@@ -19,14 +19,14 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CommentDto> getCommentById(@PathVariable String id) {
-        return ResponseEntity.ok(commentService.getCommentById(id));
+    @GetMapping("/{commentId}")
+    public ResponseEntity<CommentDto> getCommentById(@PathVariable String commentId) {
+        return ResponseEntity.ok(commentService.getCommentById(commentId));
     }
 
-    @PostMapping()
-    public ResponseEntity<CommentDto> createComment(@Valid @RequestBody CreateCommentRequest request) {
-        return ResponseEntity.ok(commentService.createComment(request));
+    @PostMapping("/{postId}/{commentatorId}")
+    public ResponseEntity<CommentDto> createComment(@PathVariable String postId, @PathVariable String commentatorId,@Valid @RequestBody CreateCommentRequest request) {
+        return ResponseEntity.ok(commentService.createComment(postId,commentatorId,request));
     }
 
     @DeleteMapping("/{commentId}")
@@ -35,7 +35,7 @@ public class CommentController {
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<CommentDto> updateComment(@PathVariable String id, @Valid @RequestBody UpdateCommentRequest request) {
-        return ResponseEntity.ok(commentService.updateComment(id, request));
+    public ResponseEntity<CommentDto> updateComment(@PathVariable String commentId, @Valid @RequestBody UpdateCommentRequest request) {
+        return ResponseEntity.ok(commentService.updateComment(commentId, request));
     }
 }

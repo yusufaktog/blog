@@ -1,7 +1,5 @@
 package com.folksdev.blog.dto.request
 
-import com.folksdev.blog.entity.Author
-import com.folksdev.blog.entity.Blog
 import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
@@ -16,9 +14,4 @@ data class CreatePostRequest(
     @field:PastOrPresent
     val post_date: LocalDate,
 
-    @field:NotNull
-    val author: Author,
-
-    @field:NotNull
-    val blog: Blog
 )

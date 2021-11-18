@@ -26,7 +26,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="f870be46-143b-499b-9bed-147645ee1d73">
-        <schema name="public" object-types="table, view" />
+        <schema name="pg_catalog" object-types="function" />
+        <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
@@ -43,6 +44,7 @@
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="Blog.Author" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.blog_commentators" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.commentator" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.comment" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="f870be46-143b-499b-9bed-147645ee1d73" dataset="public.blog" active-filter-id="EMPTY_FILTER" />

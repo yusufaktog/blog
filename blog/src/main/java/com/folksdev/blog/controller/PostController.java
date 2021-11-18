@@ -19,14 +19,14 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable String id) {
-        return ResponseEntity.ok(postService.getPostById(id));
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable String postId) {
+        return ResponseEntity.ok(postService.getPostById(postId));
     }
 
-    @PostMapping("/{userId}")
-    public ResponseEntity<PostDto> createPost(@Valid @RequestBody CreatePostRequest request) {
-        return ResponseEntity.ok(postService.createPost(request));
+    @PostMapping("/{authorId}/{blogId}")
+    public ResponseEntity<PostDto> createPost(@PathVariable String authorId, @PathVariable String blogId, @Valid @RequestBody CreatePostRequest request) {
+        return ResponseEntity.ok(postService.createPost(authorId, blogId, request));
     }
 
     @DeleteMapping("/{postId}")
@@ -35,7 +35,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostDto> updatePost(@PathVariable String id,@Valid @RequestBody UpdatePostRequest request) {
-        return ResponseEntity.ok(postService.updatePost(id,request));
+    public ResponseEntity<PostDto> updatePost(@PathVariable String postId,@Valid @RequestBody UpdatePostRequest request) {
+        return ResponseEntity.ok(postService.updatePost(postId,request));
     }
 }

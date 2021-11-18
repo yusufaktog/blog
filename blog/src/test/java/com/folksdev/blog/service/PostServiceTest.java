@@ -43,14 +43,14 @@ class PostServiceTest extends TestDataGenerator {
     }
 
     @Test
-    void testCreatePost_whenBlogNotExists_shouldThrowBlogNotFoundException() {
+    void testCreatePost_whenBlogNotExistsAndAuthorExists_shouldThrowBlogNotFoundException() {
         CreatePostRequest createPostRequest = generateCreatePostRequest();
 
-        Mockito.when(blogService.findByBlogId(createPostRequest.getBlog().getBlog_id())).thenThrow(BlogNotFoundException.class);
+        Mockito.when(blogService.findByBlogId("blog_id")).thenThrow(BlogNotFoundException.class);
 
-        assertThrows(BlogNotFoundException.class, () -> postService.createPost(createPostRequest));
+        assertThrows(BlogNotFoundException.class, () -> postService.createPost("author_id","blog_id",createPostRequest));
 
-        Mockito.verify(blogService).findByBlogId(createPostRequest.getBlog().getBlog_id());
+        Mockito.verify(blogService).findByBlogId("blog_id");
         Mockito.verifyNoInteractions(authorService);
         Mockito.verifyNoInteractions(postRepository);
         Mockito.verifyNoInteractions(postDtoConverter);
@@ -61,13 +61,13 @@ class PostServiceTest extends TestDataGenerator {
     void testCreatePost_whenBlogExistsAndAuthorNotExist_shouldThrowAuthorNotFoundException() {
         CreatePostRequest createPostRequest = generateCreatePostRequest();
 
-        Mockito.when(blogService.findByBlogId(createPostRequest.getBlog().getBlog_id())).thenReturn(createPostRequest.getBlog());
-        Mockito.when(authorService.findByAuthorId(createPostRequest.getAuthor().getAuthor_id())).thenThrow(AuthorNotFoundException.class);
+        Mockito.when(blogService.findByBlogId("blog_id")).thenReturn(generateBlog());
+        Mockito.when(authorService.findByAuthorId("author_id")).thenThrow(AuthorNotFoundException.class);
 
-        assertThrows(AuthorNotFoundException.class, () -> postService.createPost(createPostRequest));
+        assertThrows(AuthorNotFoundException.class, () -> postService.createPost("author_id","blog_id",createPostRequest));
 
-        Mockito.verify(blogService).findByBlogId(createPostRequest.getBlog().getBlog_id());
-        Mockito.verify(authorService).findByAuthorId(createPostRequest.getAuthor().getAuthor_id());
+        Mockito.verify(blogService).findByBlogId("blog_id");
+        Mockito.verify(authorService).findByAuthorId("author_id");
         Mockito.verifyNoInteractions(postRepository);
         Mockito.verifyNoInteractions(postDtoConverter);
 
@@ -87,7 +87,7 @@ class PostServiceTest extends TestDataGenerator {
         Mockito.when(postDtoConverter.convert(post)).thenReturn(expected);
         Mockito.when(postRepository.save(post)).thenReturn(post);
 
-        PostDto actual = postService.createPost(createPostRequest);
+        PostDto actual = postService.createPost("author_id","blog_id",createPostRequest);
 
         assertEquals(expected, actual);
 

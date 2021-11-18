@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "v1/Blog")
+@RequestMapping(value = "v1/blog")
 public class BlogController {
     private final BlogService blogService;
 
@@ -24,7 +24,7 @@ public class BlogController {
         return ResponseEntity.ok(blogService.getAllBlogDtoList());
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{blogId}")
     public ResponseEntity<BlogDto> findByBlogId(@PathVariable String blogId) {
         return ResponseEntity.ok(blogService.getBlogById(blogId));
     }
@@ -34,9 +34,9 @@ public class BlogController {
         return ResponseEntity.ok(blogService.createBlog(createBlogRequest));
     }
 
-    @PutMapping
-    public ResponseEntity<BlogDto> updateBlog(@PathVariable String id,@Valid @RequestBody UpdateBlogRequest request) {
-        return ResponseEntity.ok(blogService.updateBlog(id,request));
+    @PutMapping(value = "/{blogId}")
+    public ResponseEntity<BlogDto> updateBlog(@PathVariable String blogId,@Valid @RequestBody UpdateBlogRequest request) {
+        return ResponseEntity.ok(blogService.updateBlog(blogId,request));
     }
 
     @DeleteMapping(value = "/{blogId}")

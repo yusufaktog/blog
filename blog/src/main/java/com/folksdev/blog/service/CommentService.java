@@ -50,10 +50,10 @@ public class CommentService {
     }
 
 
-    public CommentDto createComment(CreateCommentRequest request) {
+    public CommentDto createComment(String postId, String commentatorId,CreateCommentRequest request) {
 
-        Post post = postService.findByPostId(request.getPost().getPost_id());
-        Commentator commentator = commentatorService.findByCommentatorId(request.getCommentator().getCommentator_id());
+        Post post = postService.findByPostId(postId);
+        Commentator commentator = commentatorService.findByCommentatorId(commentatorId);
 
         Comment comment = new Comment(
                 request.getComment_content(),

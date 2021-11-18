@@ -10,19 +10,21 @@ import com.folksdev.blog.exception.AuthorNotFoundException;
 import com.folksdev.blog.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AuthorService {
 
     private final AuthorRepository authorRepository;
     private final AuthorDtoConverter authorDtoConverter;
+    private final BlogService blogService;
 
-    public AuthorService(AuthorRepository authorRepository, AuthorDtoConverter authorDtoConverter) {
+    public AuthorService(AuthorRepository authorRepository, AuthorDtoConverter authorDtoConverter, BlogService blogService) {
         this.authorRepository = authorRepository;
         this.authorDtoConverter = authorDtoConverter;
+        this.blogService = blogService;
     }
 
 
@@ -42,7 +44,8 @@ public class AuthorService {
         return "delete " + authorId;
     }
 
-    public AuthorDto createAuthor(CreateAuthorRequest request) {
+    public AuthorDto createAuthor(String blogId, CreateAuthorRequest request) {
+        Blog blog = blogService.findByBlogId(blogId);
 
         Author author = new Author(
                 request.getAuthor_name(),
@@ -50,7 +53,7 @@ public class AuthorService {
                 request.getDateOfBirth(),
                 request.getGender(),
                 request.getAuth_date(),
-                Collections.emptySet()
+                Set.of(blog)
         );
 
         return authorDtoConverter.convert(authorRepository.save(author));

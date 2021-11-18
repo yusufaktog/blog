@@ -48,10 +48,10 @@ public class PostService {
         return postDtoConverter.convert(getAllPostList());
     }
 
-    public PostDto createPost(CreatePostRequest request) {
+    public PostDto createPost(String authorId, String blogId, CreatePostRequest request) {
 
-        Blog blog = blogService.findByBlogId(request.getBlog().getBlog_id());
-        Author author = authorService.findByAuthorId(request.getAuthor().getAuthor_id());
+        Blog blog = blogService.findByBlogId(blogId);
+        Author author = authorService.findByAuthorId(authorId);
 
         Post Post = new Post(
                 request.getPost_content(),
@@ -59,7 +59,6 @@ public class PostService {
                 author,
                 blog
         );
-
         return postDtoConverter.convert(postRepository.save(Post));
     }
 

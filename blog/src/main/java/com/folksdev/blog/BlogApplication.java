@@ -16,11 +16,6 @@ public class BlogApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-       /* Blog blog = new Blog("test blog",LocalDate.now());
-        Author author = new Author("Josef","josef@example.com",LocalDate.now(), Author.Gender.FEMALE, LocalDateTime.now(), blog.getBlog_id(), Collections.emptySet());
-        Post post = new Post("test post", LocalDate.now(),author.getAuthor_id(), blog.getBlog_id(), author, blog);
-        Commentator commentator = new Commentator("Test Commentator",LocalDate.now(),blog.getBlog_id(),Set.of(blog));
-        Comment comment = new Comment("Test comment",LocalDateTime.now(),post.getPost_id(),post,commentator);*/
 
     }
 }
