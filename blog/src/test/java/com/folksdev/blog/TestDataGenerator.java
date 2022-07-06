@@ -328,9 +328,9 @@ public class TestDataGenerator {
 
     public Commentator generateUpdateCommentator(Commentator commentator, UpdateCommentatorRequest updateCommentatorRequest) {
         return new Commentator(
-                commentator.getCommentator_id(),
-                updateCommentatorRequest.getCommentator_name(),
-                commentator.getAuth_date(),
+                commentator.getId(),
+                updateCommentatorRequest.getName(),
+                commentator.getAuthDate(),
                 commentator.getComments(),
                 commentator.getBlogs()
         );
@@ -338,12 +338,12 @@ public class TestDataGenerator {
 
     public Author generateUpdateAuthor(Author author, UpdateAuthorRequest updateAuthorRequest) {
         return new Author(
-                author.getAuthor_id(),
+                author.getId(),
                 updateAuthorRequest.getName(),
                 updateAuthorRequest.getEmail(),
                 author.getDateOfBirth(),
                 updateAuthorRequest.getGender(),
-                author.getAuth_date(),
+                author.getAuthDate(),
                 author.getPosts(),
                 author.getBlogs()
         );
@@ -352,8 +352,8 @@ public class TestDataGenerator {
 
     public Comment generateUpdatedComment(Comment comment, UpdateCommentRequest updateCommentRequest) {
         return new Comment(
-                comment.getComment_id(),
-                updateCommentRequest.getComment_content(),
+                comment.getId(),
+                updateCommentRequest.getContent(),
                 TEST_DATE_TIME,
                 comment.getPost(),
                 comment.getCommentator()
@@ -363,9 +363,9 @@ public class TestDataGenerator {
 
     public Post generateUpdatedPost(Post post, UpdatePostRequest updatePostRequest) {
         return new Post(
-                post.getPost_id(),
-                updatePostRequest.getPost_content(),
-                post.getPost_date(),
+                post.getId(),
+                updatePostRequest.getContent(),
+                post.getTime(),
                 post.getAuthor(),
                 post.getComments(),
                 post.getBlog());
@@ -373,9 +373,9 @@ public class TestDataGenerator {
 
     public Blog generateUpdatedBlog(Blog blog, UpdateBlogRequest updateBlogRequest) {
         return new Blog(
-                blog.getBlog_id(),
-                updateBlogRequest.getBlog_name(),
-                blog.getCreation_date(),
+                blog.getId(),
+                updateBlogRequest.getName(),
+                blog.getCreationDate(),
                 blog.getAuthors(),
                 blog.getPosts(),
                 blog.getCommentators()

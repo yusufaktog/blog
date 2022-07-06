@@ -4,5 +4,5 @@ import javax.validation.constraints.NotBlank
 
 data class UpdateBlogRequest(
     @field:NotBlank
-    val blog_name: String
+    val name: String
 )

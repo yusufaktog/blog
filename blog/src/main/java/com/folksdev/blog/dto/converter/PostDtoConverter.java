@@ -25,9 +25,9 @@ public class PostDtoConverter extends DtoConverterHelper {
 
     public PostDto convert(Post from) {
         return new PostDto(
-                from.getPost_id(),
-                from.getPost_content(),
-                from.getPost_date(),
+                from.getId(),
+                from.getContent(),
+                from.getTime(),
                 getCommentList(new ArrayList<>(from.getComments())),
                 sAuthorDtoConverter.convert(from.getAuthor()),
                 sBlogDtoConverter.convert(from.getBlog())

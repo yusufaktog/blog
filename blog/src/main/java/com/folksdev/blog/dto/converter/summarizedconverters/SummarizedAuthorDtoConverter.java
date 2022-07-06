@@ -9,7 +9,7 @@ public class SummarizedAuthorDtoConverter {
 
     public SummarizedAuthorDto convert(Author from) {
         return new SummarizedAuthorDto(
-                from.getAuthor_id(),
+                from.getId(),
                 from.getName(),
                 from.getEmail(),
                 from.getDateOfBirth(),

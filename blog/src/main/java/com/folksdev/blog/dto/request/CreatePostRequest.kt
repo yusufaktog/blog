@@ -8,10 +8,10 @@ import javax.validation.constraints.PastOrPresent
 data class CreatePostRequest(
 
     @field:NotBlank
-    val post_content: String,
+    val content: String,
 
     @field:NotNull
     @field:PastOrPresent
-    val post_date: LocalDate,
+    val date: LocalDate,
 
-)
+    )

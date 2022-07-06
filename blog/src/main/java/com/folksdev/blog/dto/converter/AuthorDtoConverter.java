@@ -15,7 +15,7 @@ public class AuthorDtoConverter extends DtoConverterHelper {
 
     public AuthorDto convert(Author from) {
         return new AuthorDto(
-                from.getAuthor_id(),
+                from.getId(),
                 from.getName(),
                 from.getEmail(),
                 from.getDateOfBirth(),

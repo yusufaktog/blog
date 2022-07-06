@@ -16,9 +16,9 @@ public class BlogDtoConverter extends DtoConverterHelper {
 
     public BlogDto convert(Blog from){
         return new BlogDto(
-                from.getBlog_id(),
-                from.getBlog_name(),
-                from.getCreation_date(),
+                from.getId(),
+                from.getName(),
+                from.getCreationDate(),
                 getAuthorList(new ArrayList<>(from.getAuthors())),
                 getPostList(new ArrayList<>(from.getPosts())),
                 getCommentatorList(new ArrayList<>(from.getCommentators()))

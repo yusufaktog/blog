@@ -4,7 +4,7 @@ import com.folksdev.blog.entity.Author
 import java.time.LocalDate
 
 data class SummarizedAuthorDto(
-    val author_id: String? = "",
+    val id: String? = "",
     val name: String,
     val email: String,
     val dateOfBirth: LocalDate?,

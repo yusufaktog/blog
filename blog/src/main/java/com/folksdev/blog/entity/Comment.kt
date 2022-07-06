@@ -11,9 +11,9 @@ data class Comment @JvmOverloads constructor(
     @Column(name = "comment_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    val comment_id : String? = "",
-    val comment_content: String,
-    val comment_time: LocalDateTime,
+    val id : String? = "",
+    val content: String,
+    val time: LocalDateTime,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
@@ -29,13 +29,13 @@ data class Comment @JvmOverloads constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Comment
 
-        return comment_id != null && comment_id == other.comment_id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = 0
 
     @Override
     override fun     toString(): String {
-        return this::class.simpleName + "(comment_id = $comment_id )"
+        return this::class.simpleName + "(comment_id = $id )"
     }
 }

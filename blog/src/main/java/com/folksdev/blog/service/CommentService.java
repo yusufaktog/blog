@@ -12,7 +12,6 @@ import com.folksdev.blog.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -56,8 +55,8 @@ public class CommentService {
         Commentator commentator = commentatorService.findByCommentatorId(commentatorId);
 
         Comment comment = new Comment(
-                request.getComment_content(),
-                request.getComment_time(),
+                request.getContent(),
+                request.getTime(),
                 post,
                 commentator);
 
@@ -74,9 +73,9 @@ public class CommentService {
         Comment comment = findByCommentId(id);
 
         Comment updatedComment = new Comment(
-                comment.getComment_id(),
-                request.getComment_content(),
-                comment.getComment_time(),
+                comment.getId(),
+                request.getContent(),
+                comment.getTime(),
                 comment.getPost(),
                 comment.getCommentator());
 

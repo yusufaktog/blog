@@ -7,9 +7,9 @@ import com.folksdev.blog.dto.summarizeddtos.SummarizedPostDto
 import java.time.LocalDate
 
 data class BlogDto(
-    val blog_id: String? = "",
-    val blog_name: String,
-    val creation_date: LocalDate,
+    val id: String? = "",
+    val name: String,
+    val creationDate: LocalDate,
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val authors: List<SummarizedAuthorDto>? = ArrayList(),

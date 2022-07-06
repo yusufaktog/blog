@@ -11,10 +11,9 @@ data class Blog @JvmOverloads constructor(
     @Column(name = "blog_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val blog_id: String? = "",
-    val blog_name: String,
-    val creation_date: LocalDate,
-
+    val id: String? = "",
+    val name: String,
+    val creationDate: LocalDate,
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -43,13 +42,13 @@ data class Blog @JvmOverloads constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Blog
 
-        return blog_id != null && blog_id == other.blog_id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = 0
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(blog_id = $blog_id )"
+        return this::class.simpleName + "(blog_id = $id )"
     }
 }

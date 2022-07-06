@@ -7,15 +7,15 @@ import com.folksdev.blog.entity.Author
 import java.time.LocalDate
 
 data class AuthorDto(
-    val author_id: String? = "",
+    val id: String? = "",
     val name: String,
     val email: String,
     val dateOfBirth: LocalDate?,
     val gender: Author.Gender,
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val posts: List<SummarizedPostDto>? = ArrayList(),
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val blogs: List<SummarizedBlogDto>? = ArrayList()
-
-
 )

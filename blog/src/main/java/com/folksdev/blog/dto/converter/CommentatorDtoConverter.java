@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 public class CommentatorDtoConverter extends DtoConverterHelper {
     public CommentatorDto convert(Commentator commentator){
         return new CommentatorDto(
-                commentator.getCommentator_id(),
-                commentator.getCommentator_name(),
-                commentator.getAuth_date(),
+                commentator.getId(),
+                commentator.getName(),
+                commentator.getAuthDate(),
                 getCommentList(new ArrayList<>(commentator.getComments()))
 
         );

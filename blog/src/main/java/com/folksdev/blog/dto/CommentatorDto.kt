@@ -6,9 +6,9 @@ import java.time.LocalDate
 
 data class CommentatorDto(
 
-    val commentator_id: String? = "",
-    val commentator_name: String,
-    val auth_date: LocalDate,
+    val id: String? = "",
+    val name: String,
+    val authDate: LocalDate,
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val comments: List<SummarizedCommentDto>? = ArrayList(),

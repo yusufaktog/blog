@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 public class SummarizedBlogDtoConverter {
     public SummarizedBlogDto convert(Blog from){
         return  new SummarizedBlogDto(
-                from.getBlog_id(),
-                from.getBlog_name(),
-                from.getCreation_date()
+                from.getId(),
+                from.getName(),
+                from.getCreationDate()
         );
     }
 }

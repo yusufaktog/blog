@@ -4,5 +4,5 @@ import javax.validation.constraints.NotBlank
 
 data class UpdatePostRequest(
     @field:NotBlank
-    val post_content: String
+    val content: String
 )

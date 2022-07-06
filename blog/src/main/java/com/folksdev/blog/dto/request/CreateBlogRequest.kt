@@ -6,10 +6,10 @@ import javax.validation.constraints.*
 data class CreateBlogRequest(
 
     @field:NotBlank
-    val blog_name: String,
+    val name: String,
 
     @field:NotNull
     @field:PastOrPresent
-    val creation_date: LocalDate,
+    val creationDate: LocalDate,
 
-)
+    )

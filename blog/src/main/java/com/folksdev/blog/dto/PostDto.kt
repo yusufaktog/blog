@@ -7,9 +7,9 @@ import com.folksdev.blog.dto.summarizeddtos.SummarizedCommentDto
 import java.time.LocalDate
 
 data class PostDto(
-    val post_id: String? = "",
-    val post_content: String,
-    val post_date: LocalDate,
+    val id: String? = "",
+    val content: String,
+    val date: LocalDate,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val comments: List<SummarizedCommentDto>? = ArrayList(),
     val author: SummarizedAuthorDto,

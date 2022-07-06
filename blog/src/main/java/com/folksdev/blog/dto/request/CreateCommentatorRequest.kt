@@ -8,10 +8,10 @@ import javax.validation.constraints.PastOrPresent
 data class CreateCommentatorRequest(
 
     @field:NotBlank
-    val commentator_name: String,
+    val name: String,
 
     @field:NotNull
     @field:PastOrPresent
-    val auth_date: LocalDate,
+    val date: LocalDate,
 
-)
+    )

@@ -8,10 +8,10 @@ import javax.validation.constraints.PastOrPresent
 data class CreateCommentRequest(
 
     @field:NotBlank
-    val comment_content: String,
+    val content: String,
 
     @field:NotNull
     @field:PastOrPresent
-    val comment_time: LocalDateTime,
+    val time: LocalDateTime,
 
-)
+    )

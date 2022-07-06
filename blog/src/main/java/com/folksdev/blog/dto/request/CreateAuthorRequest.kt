@@ -8,7 +8,7 @@ import javax.validation.constraints.*
 data class CreateAuthorRequest(
 
     @field:NotBlank
-    val author_name: String,
+    val name: String,
 
     @field:Email
     val email: String,
@@ -19,7 +19,7 @@ data class CreateAuthorRequest(
     val gender: Author.Gender,
 
     @field: PastOrPresent
-    val auth_date: LocalDateTime
+    val authDate: LocalDateTime
 
 
 )

@@ -9,9 +9,9 @@ public class SummarizedPostDtoConverter {
 
     public SummarizedPostDto convert(Post from){
         return new SummarizedPostDto(
-                from.getPost_id(),
-                from.getPost_content(),
-                from.getPost_date()
+                from.getId(),
+                from.getContent(),
+                from.getTime()
         );
     }
 }

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 public class SummarizedCommentatorDtoConverter {
     public SummarizedCommentatorDto convert(Commentator from){
         return new SummarizedCommentatorDto(
-                from.getCommentator_id(),
-                from.getCommentator_name(),
-                from.getAuth_date()
+                from.getId(),
+                from.getName(),
+                from.getAuthDate()
         );
     }
 }

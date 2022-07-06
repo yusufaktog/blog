@@ -11,16 +11,14 @@ data class Commentator @JvmOverloads constructor(
     @Column(name = "commentator_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val commentator_id: String? = "",
-    val commentator_name: String,
-    val auth_date: LocalDate,
-
+    val id: String? = "",
+    val name: String,
+    val authDate: LocalDate,
 
     @OneToMany(mappedBy = "commentator", fetch = FetchType.LAZY)
     val comments: Set<Comment>? = HashSet(),
 
-    @ManyToMany
-    @JoinColumn(name = "blog_id", referencedColumnName = "blog_id")
+    @ManyToMany(mappedBy = "commentators", fetch = FetchType.LAZY)
     var blogs: Set<Blog>
 
 ) {
@@ -29,13 +27,13 @@ data class Commentator @JvmOverloads constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Commentator
 
-        return commentator_id != null && commentator_id == other.commentator_id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = 0
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(commentator_id = $commentator_id )"
+        return this::class.simpleName + "(commentator_id = $id )"
     }
 }

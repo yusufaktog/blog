@@ -32,8 +32,8 @@ public class BlogService {
 
     public BlogDto createBlog(CreateBlogRequest request) {
         Blog blog = new Blog(
-                request.getBlog_name(),
-                request.getCreation_date());
+                request.getName(),
+                request.getCreationDate());
         return blogDtoConverter.convert(blogRepository.save(blog));
 
     }
@@ -49,9 +49,9 @@ public class BlogService {
     public BlogDto updateBlog(String blogId, UpdateBlogRequest request) {
         Blog blog = findByBlogId(blogId);
         Blog updatedBlog = new Blog(
-                blog.getBlog_id(),
-                request.getBlog_name(),
-                blog.getCreation_date(),
+                blog.getId(),
+                request.getName(),
+                blog.getCreationDate(),
                 blog.getAuthors(),
                 blog.getPosts(),
                 blog.getCommentators()

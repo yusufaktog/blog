@@ -13,7 +13,7 @@ public class DtoConverterHelper {
 
         return authors.stream().map(
                 a -> new SummarizedAuthorDto(
-                        a.getAuthor_id(),
+                        a.getId(),
                         a.getName(),
                         a.getEmail(),
                         a.getDateOfBirth(),
@@ -27,9 +27,9 @@ public class DtoConverterHelper {
     protected List<SummarizedCommentDto> getCommentList(List<Comment> comments) {
         return comments.stream().map(
                 c -> new SummarizedCommentDto(
-                        c.getComment_id(),
-                        c.getComment_content(),
-                        c.getComment_time()
+                        c.getId(),
+                        c.getContent(),
+                        c.getTime()
 
                 )
         ).collect(Collectors.toList());
@@ -38,9 +38,9 @@ public class DtoConverterHelper {
     protected List<SummarizedCommentatorDto> getCommentatorList(List<Commentator> commentators) {
         return commentators.stream().map(
                 c -> new SummarizedCommentatorDto(
-                        c.getCommentator_id(),
-                        c.getCommentator_name(),
-                        c.getAuth_date()
+                        c.getId(),
+                        c.getName(),
+                        c.getAuthDate()
 
                 )
         ).collect(Collectors.toList());
@@ -49,9 +49,9 @@ public class DtoConverterHelper {
     protected List<SummarizedBlogDto> getBlogList(List<Blog> blogs) {
         return blogs.stream().map(
                 b -> new SummarizedBlogDto(
-                        b.getBlog_id(),
-                        b.getBlog_name(),
-                        b.getCreation_date()
+                        b.getId(),
+                        b.getName(),
+                        b.getCreationDate()
                 )
         ).collect(Collectors.toList());
 
@@ -60,9 +60,9 @@ public class DtoConverterHelper {
     protected List<SummarizedPostDto> getPostList(List<Post> posts) {
         return posts.stream().map(
                 p -> new SummarizedPostDto(
-                        p.getPost_id(),
-                        p.getPost_content(),
-                        p.getPost_date())).collect(Collectors.toList());
+                        p.getId(),
+                        p.getContent(),
+                        p.getTime())).collect(Collectors.toList());
 
     }
 

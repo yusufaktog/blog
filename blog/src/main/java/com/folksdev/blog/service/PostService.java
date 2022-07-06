@@ -11,10 +11,7 @@ import com.folksdev.blog.exception.PostNotFoundException;
 import com.folksdev.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -54,8 +51,8 @@ public class PostService {
         Author author = authorService.findByAuthorId(authorId);
 
         Post Post = new Post(
-                request.getPost_content(),
-                request.getPost_date(),
+                request.getContent(),
+                request.getDate(),
                 author,
                 blog
         );
@@ -73,9 +70,9 @@ public class PostService {
         Post post = findByPostId(id);
 
         Post updatedPost = new Post(
-                post.getPost_id(),
-                request.getPost_content(),
-                post.getPost_date(),
+                post.getId(),
+                request.getContent(),
+                post.getTime(),
                 post.getAuthor(),
                 post.getComments(),
                 post.getBlog()

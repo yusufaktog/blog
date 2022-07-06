@@ -15,12 +15,12 @@ data class Author @JvmOverloads constructor(
     @Column(name = "author_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    val author_id: String? = "",
+    val id: String? = "",
     val name: String,
     val email: String,
     val dateOfBirth: LocalDate,
     val gender: Gender,
-    val auth_date: LocalDateTime,
+    val authDate: LocalDateTime,
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     val posts: Set<Post>? = HashSet(),
@@ -34,14 +34,14 @@ data class Author @JvmOverloads constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Author
 
-        return author_id != null && author_id == other.author_id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = 0
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(author_id = $author_id )"
+        return this::class.simpleName + "(author_id = $id )"
     }
     enum class Gender {
         MALE, FEMALE, UNKOWN

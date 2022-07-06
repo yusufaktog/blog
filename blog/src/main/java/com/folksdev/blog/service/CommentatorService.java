@@ -40,8 +40,8 @@ public class CommentatorService {
         Blog blog = blogService.findByBlogId(blogId);
 
         Commentator Commentator = new Commentator(
-                request.getCommentator_name(),
-                request.getAuth_date(),
+                request.getName(),
+                request.getDate(),
                 Set.of(blog)
         );
 
@@ -67,9 +67,9 @@ public class CommentatorService {
         Commentator commentator = findByCommentatorId(id);
 
         Commentator updatedCommentator = new Commentator(
-                commentator.getCommentator_id(),
-                request.getCommentator_name(),
-                commentator.getAuth_date(),
+                commentator.getId(),
+                request.getName(),
+                commentator.getAuthDate(),
                 commentator.getComments(),
                 commentator.getBlogs()
         );

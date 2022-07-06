@@ -11,10 +11,9 @@ data class Post @JvmOverloads constructor(
     @Column(name = "post_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    val post_id : String? = "",
-    val post_content : String,
-    val post_date: LocalDate,
-
+    val id : String? = "",
+    val content : String,
+    val time: LocalDate,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id") // her zaman many to one olan yere join column koy!
@@ -33,13 +32,13 @@ data class Post @JvmOverloads constructor(
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Post
 
-        return post_id != null && post_id == other.post_id
+        return id != null && id == other.id
     }
 
     override fun hashCode(): Int = 0
 
     @Override
     override fun toString(): String {
-        return this::class.simpleName + "(post_id = $post_id )"
+        return this::class.simpleName + "(post_id = $id )"
     }
 }
