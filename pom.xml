@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <kotlin.version>1.7.0</kotlin.version>
         <flyway-maven-plugin.version>8.0.0</flyway-maven-plugin.version>
+        <maven-compiler.version>3.5.1</maven-compiler.version>
     </properties>
     <dependencies>
         <!-- SPRING -->
@@ -112,7 +113,6 @@
                     <compilerPlugins>
                         <plugin>jpa</plugin>
                     </compilerPlugins>
-                    <jvmTarget>1.8</jvmTarget>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -129,6 +129,10 @@
                             <goal>compile</goal>
                         </goals>
                         <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                            </sourceDirs>
                             <args>
                                 <arg>-Xskip-prerelease-check</arg>
                             </args>
@@ -140,13 +144,19 @@
                         <goals>
                             <goal>test-compile</goal>
                         </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compiler.version}</version>
                 <executions>
                     <execution>
                         <id>default-compile</id>
