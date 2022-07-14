@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.*
-import kotlin.collections.HashSet
 
 
 @Entity

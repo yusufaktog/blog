@@ -3,7 +3,9 @@ package com.folksdev.blog.dto.request
 import com.folksdev.blog.entity.Author
 import java.time.LocalDate
 import java.time.LocalDateTime
-import javax.validation.constraints.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.PastOrPresent
 
 data class CreateAuthorRequest(
 

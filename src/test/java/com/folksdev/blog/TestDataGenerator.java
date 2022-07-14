@@ -6,7 +6,6 @@ import com.folksdev.blog.dto.request.update.*;
 import com.folksdev.blog.dto.summarizeddtos.*;
 import com.folksdev.blog.entity.*;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

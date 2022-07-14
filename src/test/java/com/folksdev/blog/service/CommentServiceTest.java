@@ -6,19 +6,19 @@ import com.folksdev.blog.dto.converter.CommentDtoConverter;
 import com.folksdev.blog.dto.request.CreateCommentRequest;
 import com.folksdev.blog.dto.request.update.UpdateCommentRequest;
 import com.folksdev.blog.entity.Comment;
+import com.folksdev.blog.exception.CommentNotFoundException;
 import com.folksdev.blog.exception.CommentatorNotFoundException;
 import com.folksdev.blog.exception.PostNotFoundException;
-import com.folksdev.blog.exception.CommentNotFoundException;
 import com.folksdev.blog.repository.CommentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CommentServiceTest extends TestDataGenerator {
     private CommentRepository commentRepository;

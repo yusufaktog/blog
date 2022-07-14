@@ -4,8 +4,6 @@ package com.folksdev.blog;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.folksdev.blog.TestDataGenerator;
-import com.folksdev.blog.config.DataLoader;
 import com.folksdev.blog.dto.converter.*;
 import com.folksdev.blog.repository.*;
 import com.folksdev.blog.service.*;
@@ -14,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.web.servlet.MockMvc;
 
 

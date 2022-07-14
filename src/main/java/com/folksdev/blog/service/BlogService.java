@@ -9,7 +9,6 @@ import com.folksdev.blog.exception.BlogNotFoundException;
 import com.folksdev.blog.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service

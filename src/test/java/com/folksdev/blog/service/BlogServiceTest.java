@@ -2,12 +2,10 @@ package com.folksdev.blog.service;
 
 import com.folksdev.blog.TestDataGenerator;
 import com.folksdev.blog.dto.BlogDto;
-import com.folksdev.blog.dto.PostDto;
 import com.folksdev.blog.dto.converter.BlogDtoConverter;
 import com.folksdev.blog.dto.request.CreateBlogRequest;
 import com.folksdev.blog.dto.request.update.UpdateBlogRequest;
 import com.folksdev.blog.entity.Blog;
-import com.folksdev.blog.entity.Post;
 import com.folksdev.blog.exception.BlogNotFoundException;
 import com.folksdev.blog.exception.PostNotFoundException;
 import com.folksdev.blog.repository.BlogRepository;
@@ -18,7 +16,8 @@ import org.mockito.Mockito;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BlogServiceTest extends TestDataGenerator {
     private BlogRepository blogRepository;

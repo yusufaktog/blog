@@ -6,20 +6,18 @@ import com.folksdev.blog.dto.converter.AuthorDtoConverter;
 import com.folksdev.blog.dto.request.CreateAuthorRequest;
 import com.folksdev.blog.dto.request.update.UpdateAuthorRequest;
 import com.folksdev.blog.entity.Author;
-import com.folksdev.blog.entity.Blog;
 import com.folksdev.blog.exception.AuthorNotFoundException;
 import com.folksdev.blog.exception.BlogNotFoundException;
 import com.folksdev.blog.repository.AuthorRepository;
-import com.folksdev.blog.repository.BlogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AuthorServiceTest extends TestDataGenerator {
     private AuthorRepository authorRepository;

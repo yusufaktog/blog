@@ -2,7 +2,6 @@ package com.folksdev.blog.dto.converter;
 
 import com.folksdev.blog.dto.CommentatorDto;
 import com.folksdev.blog.dto.converter.converterhelper.DtoConverterHelper;
-
 import com.folksdev.blog.entity.Commentator;
 import org.springframework.stereotype.Component;
 
