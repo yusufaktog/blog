@@ -26,7 +26,7 @@ class AuthorServiceTest extends TestDataGenerator {
 
 
     private AuthorService authorService;
-    
+
     @BeforeEach
     void setUp() {
         authorRepository = Mockito.mock(AuthorRepository.class);
@@ -34,24 +34,25 @@ class AuthorServiceTest extends TestDataGenerator {
 
         blogService = Mockito.mock(BlogService.class);
 
-        authorService = new AuthorService(authorRepository,authorDtoConverter, blogService);
+        authorService = new AuthorService(authorRepository, authorDtoConverter, blogService);
     }
-    
+
     @Test
     void testGetAuthorById_itShouldReturnAuthorDto() {
-        Author post = generateAuthor();
+        Author author = generateAuthor();
         AuthorDto expected = generateAuthorDto();
 
-        Mockito.when(authorRepository.findById("author_id")).thenReturn(Optional.ofNullable(post));
-        Mockito.when(authorDtoConverter.convert(post)).thenReturn(expected);
+        Mockito.when(authorRepository.findById("author_id")).thenReturn(Optional.ofNullable(author));
+        Mockito.when(authorDtoConverter.convert(author)).thenReturn(expected);
 
         AuthorDto actual = authorService.getAuthorById("author_id");
 
         assertEquals(expected, actual);
 
         Mockito.verify(authorRepository).findById("author_id");
-        Mockito.verify(authorDtoConverter).convert(post);
+        Mockito.verify(authorDtoConverter).convert(author);
     }
+
     @Test
     void testDeleteAuthorById_whenAuthorIdExist_itShouldReturnString() {
         Author post = generateAuthor();
@@ -65,6 +66,7 @@ class AuthorServiceTest extends TestDataGenerator {
         Mockito.verify(authorRepository).findById("author_id");
 
     }
+
     @Test
     void testDeleteByAuthorId_whenAuthorIdNotExist_itShouldThrowAuthorNotFoundException() {
         Mockito.when(authorRepository.findById("author_id")).thenThrow(AuthorNotFoundException.class);
@@ -75,6 +77,7 @@ class AuthorServiceTest extends TestDataGenerator {
         Mockito.verifyNoInteractions(authorDtoConverter);
 
     }
+
     @Test
     void testGetAllAuthorDtoList_itShouldReturnAuthorDtoList() {
         List<Author> authorList = generateAuthorList();
@@ -105,7 +108,7 @@ class AuthorServiceTest extends TestDataGenerator {
     }
 
     @Test
-    void testCreateAuthor_whenBlogExists_itShouldReturnAuthorDto(){
+    void testCreateAuthor_whenBlogExists_itShouldReturnAuthorDto() {
         CreateAuthorRequest authorRequest = generateCreateAuthorRequest();
 
         Author author = generateTestAuthor();
@@ -117,22 +120,23 @@ class AuthorServiceTest extends TestDataGenerator {
         Mockito.when(authorDtoConverter.convert(author)).thenReturn(expected);
         Mockito.when(authorRepository.save(author)).thenReturn(author);
 
-        AuthorDto actual = authorService.createAuthor("blog_id",authorRequest);
+        AuthorDto actual = authorService.createAuthor("blog_id", authorRequest);
 
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
 
         Mockito.verify(blogService).findByBlogId("blog_id");
         Mockito.verify(authorDtoConverter).convert(author);
         Mockito.verify(authorRepository).save(author);
 
     }
+
     @Test
-    void testCreateAuthor_whenBlogNotExists_itShouldThrowBlogNotFoundException(){
+    void testCreateAuthor_whenBlogNotExists_itShouldThrowBlogNotFoundException() {
         CreateAuthorRequest authorRequest = generateCreateAuthorRequest();
 
         Mockito.when(blogService.findByBlogId("blog_id")).thenThrow(BlogNotFoundException.class);
 
-        assertThrows(BlogNotFoundException.class, () -> authorService.createAuthor("blog_id",authorRequest));
+        assertThrows(BlogNotFoundException.class, () -> authorService.createAuthor("blog_id", authorRequest));
 
         Mockito.verify(blogService).findByBlogId("blog_id");
         Mockito.verifyNoInteractions(authorDtoConverter);
@@ -159,18 +163,18 @@ class AuthorServiceTest extends TestDataGenerator {
         Mockito.verify(authorDtoConverter).convert(updatedAuthor);
 
     }
+
     @Test
     void testUpdateAuthor_whenIdNotExist_itShouldThrowAuthorNotFoundException() {
 
         Mockito.when(authorRepository.findById("author_id")).thenThrow(AuthorNotFoundException.class);
 
-        assertThrows(AuthorNotFoundException.class,()-> authorService.updateAuthor("author_id",generateUpdateAuthorRequest()));
+        assertThrows(AuthorNotFoundException.class, () -> authorService.updateAuthor("author_id", generateUpdateAuthorRequest()));
 
         Mockito.verify(authorRepository).findById("author_id");
         Mockito.verifyNoInteractions(authorDtoConverter);
 
     }
-    
-    
+
 
 }
